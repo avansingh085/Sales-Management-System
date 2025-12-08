@@ -1,6 +1,6 @@
 import React from 'react';
 import { Copy } from 'lucide-react';
-
+import Loading from './Loading';
 const SalesTable = ({ data }) => {
 
   const salesData = data && data.length > 0
@@ -44,7 +44,7 @@ const SalesTable = ({ data }) => {
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+         {Array.isArray(salesData)&&salesData.length>0 ? <tbody className="divide-y divide-gray-100">
             {salesData.map((row, index) => (
               <tr key={index} className="hover:bg-gray-50 transition-colors duration-150">
                 <td className="px-6 py-4 text-gray-600 whitespace-nowrap font-medium">
@@ -98,7 +98,7 @@ const SalesTable = ({ data }) => {
                 </td>
               </tr>
             ))}
-          </tbody>
+          </tbody> : <Loading/>}
         </table>
       </div>
     </div>
