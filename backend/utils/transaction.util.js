@@ -39,16 +39,19 @@ export const getDateRange = (filterType) => {
 };
 
 export const buildMatchQuery = (queryParams) => {
-  const {
+  let {
     text,
     CustomerRegion,
     Gender,
     AgeRange,
     ProductCategory,
-    Tags,
+    ["Tags[]"]:Tags,
     PaymentMethod,
     Date: DateFilter,
   } = queryParams;
+  
+ if(typeof Tags =="string")
+  Tags=Tags.split(',');
 
   let matchQuery = {};
 
@@ -78,9 +81,11 @@ export const buildMatchQuery = (queryParams) => {
   if (PaymentMethod)
      matchQuery["Payment Method"] = PaymentMethod;
 
-  if (Tags) {
-    matchQuery["Tags"] = { $regex: Tags, $options: "i" };
-  }
+  if (Tags && Tags.length > 0) {
+  matchQuery["$and"] = Tags.map((tag) => ({
+    Tags: { $regex: new RegExp(`(^|,)${tag}(,|$)`, "i") }
+  }));
+}
 
   if (AgeRange) {
     if (AgeRange === "65+") {

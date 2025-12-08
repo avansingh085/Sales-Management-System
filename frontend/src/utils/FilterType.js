@@ -7,7 +7,7 @@ const FilterType = [
       { key: 'Asia', value: 'Asia' },
       { key: 'South', value: 'South' },
       { key: 'North', value: 'North' },
-      {Key:'West',value:'West'},
+      {key:'West',value:'West'},
       {key:'Central',value:'Central'}
     ] 
   },
@@ -18,8 +18,7 @@ const FilterType = [
       { key: 'Gender', value: '' }, 
       { key: 'Male', value: 'Male' },
       { key: 'Female', value: 'Female' }, 
-      { key: 'Non-binary', value: 'Non-binary' },
-      { key: 'Prefer not to say', value: 'Not Specified' }
+      
     ] 
   },
   { 
